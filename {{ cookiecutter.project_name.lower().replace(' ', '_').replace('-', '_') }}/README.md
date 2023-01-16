@@ -2,15 +2,23 @@
 
 <div align="center">
 
-[![Build status](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/workflows/build/badge.svg?branch=master&event=push)](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/actions?query=workflow%3Abuild)
+<!--
+You can add more badges here
+Examples are:
+- Build Status
+- Dependencies Status
+- Pre-Commit
+- Sementic Ver
+- License
+- Code Style
+- Security
+- Coverage Report
+- Python Version
+-->
 [![Python Version](https://img.shields.io/pypi/pyversions/{{ cookiecutter.project_name }}.svg)](https://pypi.org/project/{{ cookiecutter.project_name }}/)
-[![Dependencies Status](https://img.shields.io/badge/dependencies-up%20to%20date-brightgreen.svg)](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/pulls?utf8=%E2%9C%93&q=is%3Apr%20author%3Aapp%2Fdependabot)
 
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Security: bandit](https://img.shields.io/badge/security-bandit-green.svg)](https://github.com/PyCQA/bandit)
-[![Pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/.pre-commit-config.yaml)
-[![Semantic Versions](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--versions-e10079.svg)](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/releases)
-[![License](https://img.shields.io/github/license/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }})](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/LICENSE)
 ![Coverage Report](assets/images/coverage.svg)
 
 {{ cookiecutter.project_description }}
@@ -22,6 +30,7 @@
 ### Initialize your code
 
 1. Initialize `git` inside your repo:
+(Note to setup your git configs as well)
 
 ```bash
 cd {{ cookiecutter.project_name }} && git init
@@ -46,16 +55,6 @@ make pre-commit-install
 make codestyle
 ```
 
-5. Upload initial code to GitHub:
-
-```bash
-git add .
-git commit -m ":tada: Initial commit"
-git branch -M main
-git remote add origin https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}.git
-git push -u origin main
-```
-
 ### Set up bots
 
 - Set up [Dependabot](https://docs.github.com/en/github/administering-a-repository/enabling-and-disabling-version-updates#enabling-github-dependabot-version-updates) to ensure you have the latest dependencies.
@@ -64,20 +63,6 @@ git push -u origin main
 ### Poetry
 
 Want to know more about Poetry? Check [its documentation](https://python-poetry.org/docs/).
-
-<details>
-<summary>Details about Poetry</summary>
-<p>
-
-Poetry's [commands](https://python-poetry.org/docs/cli/#commands) are very intuitive and easy to learn, like:
-
-- `poetry add numpy@latest`
-- `poetry run pytest`
-- `poetry publish --build`
-
-etc
-</p>
-</details>
 
 ### Building and releasing your package
 
@@ -115,27 +100,27 @@ Articles:
 ### Development features
 
 - Supports for `Python {{ cookiecutter.minimal_python_version }}` and higher.
-- [`Poetry`](https://python-poetry.org/) as the dependencies manager. See configuration in [`pyproject.toml`](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/pyproject.toml) and [`setup.cfg`](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/setup.cfg).
+- [`Poetry`](https://python-poetry.org/) as the dependencies manager. See configuration in [`pyproject.toml`](./pyproject.toml) and [`setup.cfg`](./setup.cfg).
 - Automatic codestyle with [`black`](https://github.com/psf/black), [`isort`](https://github.com/timothycrosley/isort) and [`pyupgrade`](https://github.com/asottile/pyupgrade).
 - Ready-to-use [`pre-commit`](https://pre-commit.com/) hooks with code-formatting.
 - Type checks with [`mypy`](https://mypy.readthedocs.io); docstring checks with [`darglint`](https://github.com/terrencepreilly/darglint); security checks with [`safety`](https://github.com/pyupio/safety) and [`bandit`](https://github.com/PyCQA/bandit)
 - Testing with [`pytest`](https://docs.pytest.org/en/latest/).
-- Ready-to-use [`.editorconfig`](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/.editorconfig), [`.dockerignore`](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/.dockerignore), and [`.gitignore`](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/.gitignore). You don't have to worry about those things.
+- Ready-to-use [`.editorconfig`](./editorconfig), [`.dockerignore`](./dockerignore), and [`.gitignore`](./gitignore). You don't have to worry about those things.
 
 ### Deployment features
 
 - `GitHub` integration: issue and pr templates.
-- `Github Actions` with predefined [build workflow](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/.github/workflows/build.yml) as the default CI/CD.
-- Everything is already set up for security checks, codestyle checks, code formatting, testing, linting, docker builds, etc with [`Makefile`](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/Makefile#L89). More details in [makefile-usage](#makefile-usage).
-- [Dockerfile](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/docker/Dockerfile) for your package.
+- `Github Actions` with predefined [build workflow](./.github/workflows/build.yml) as the default CI/CD.
+- Everything is already set up for security checks, codestyle checks, code formatting, testing, linting, docker builds, etc with [`Makefile`](./Makefile#L89). More details in [makefile-usage](#makefile-usage).
+- [Dockerfile](./docker/Dockerfile) for your package.
 - Always up-to-date dependencies with [`@dependabot`](https://dependabot.com/). You will only [enable it](https://docs.github.com/en/github/administering-a-repository/enabling-and-disabling-version-updates#enabling-github-dependabot-version-updates).
-- Automatic drafts of new releases with [`Release Drafter`](https://github.com/marketplace/actions/release-drafter). You may see the list of labels in [`release-drafter.yml`](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/.github/release-drafter.yml). Works perfectly with [Semantic Versions](https://semver.org/) specification.
+- Automatic drafts of new releases with [`Release Drafter`](https://github.com/marketplace/actions/release-drafter). You may see the list of labels in [`release-drafter.yml`](./.github/release-drafter.yml). Works perfectly with [Semantic Versions](https://semver.org/) specification.
 
 ### Open source community features
 
-- Ready-to-use [Pull Requests templates](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/.github/PULL_REQUEST_TEMPLATE.md) and several [Issue templates](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/tree/master/.github/ISSUE_TEMPLATE).
+- Ready-to-use [Pull Requests templates](./.github/PULL_REQUEST_TEMPLATE.md) and several [Issue templates](./.github/ISSUE_TEMPLATE).
 - Files such as: `LICENSE`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, and `SECURITY.md` are generated automatically.
-- [`Stale bot`](https://github.com/apps/stale) that closes abandoned issues after a period of inactivity. (You will only [need to setup free plan](https://github.com/marketplace/stale)). Configuration is [here](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/.github/.stale.yml).
+- [`Stale bot`](https://github.com/apps/stale) that closes abandoned issues after a period of inactivity. (You will only [need to setup free plan](https://github.com/marketplace/stale)). Configuration is [here](./.github/.stale.yml).
 - [Semantic Versions](https://semver.org/) specification with [`Release Drafter`](https://github.com/marketplace/actions/release-drafter).
 
 ## Installation
@@ -164,7 +149,7 @@ poetry run {{ cookiecutter.project_name }} --help
 
 ### Makefile usage
 
-[`Makefile`](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/Makefile) contains a lot of functions for faster development.
+[`Makefile`](./Makefile) contains a lot of functions for faster development.
 
 <details>
 <summary>1. Download and remove Poetry</summary>
@@ -316,7 +301,7 @@ Remove docker image with
 make docker-remove
 ```
 
-More information [about docker](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/tree/master/docker).
+More information [about docker](./docker).
 
 </p>
 </details>
@@ -359,7 +344,8 @@ make cleanup
 
 ## 📈 Releases
 
-You can see the list of available releases on the [GitHub Releases](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/releases) page.
+<!-- Add in link for github releases -->
+You can see the list of available releases on the [GitHub Releases] page.
 
 We follow [Semantic Versions](https://semver.org/) specification.
 
@@ -376,17 +362,21 @@ We use [`Release Drafter`](https://github.com/marketplace/actions/release-drafte
 |            `documentation`            |    📝 Documentation     |
 |            `dependencies`             | ⬆️ Dependencies updates |
 
-You can update it in [`release-drafter.yml`](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/.github/release-drafter.yml).
+You can update it in [`release-drafter.yml`](./.github/release-drafter.yml).
 
 GitHub creates the `bug`, `enhancement`, and `documentation` labels for you. Dependabot creates the `dependencies` label. Create the remaining labels on the Issues tab of your GitHub repository, when you need them.
 
 ## 🛡 License
 
-[![License](https://img.shields.io/github/license/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }})](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/LICENSE)
+[License](./LICENSE)
 
-This project is licensed under the terms of the `{{ cookiecutter.license }}` license. See [LICENSE](https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}/blob/master/LICENSE) for more details.
+This project is licensed under the terms of the `{{ cookiecutter.license }}` license. See [LICENSE](./LICENSE) for more details.
 
 ## 📃 Citation
+<!--
+Add back in
+  howpublished = {\url{https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}{% raw %}}}{% endraw %}
+-->
 
 ```bibtex
 {% raw %}@misc{{% endraw %}{{ cookiecutter.project_name }},
@@ -395,7 +385,6 @@ This project is licensed under the terms of the `{{ cookiecutter.license }}` lic
   year = {% raw %}{{% endraw %}{% now 'utc', '%Y' %}{% raw %}}{% endraw %},
   publisher = {GitHub},
   journal = {GitHub repository},
-  howpublished = {\url{https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}{% raw %}}}{% endraw %}
 }
 ```
 
