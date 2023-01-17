@@ -4,7 +4,6 @@
     'GNU GPL v3.0': 'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
     'Apache Software License 2.0': 'License :: OSI Approved :: Apache Software License',
 } -%}
-{%- set python_version_splitted = cookiecutter.minimal_python_version.split('.') | map('int') | list -%}
 # Poetry pyproject.toml: https://python-poetry.org/docs/pyproject/
 [build-system]
 requires = ["poetry_core>=1.0.0"]
@@ -15,24 +14,24 @@ name = "{{ cookiecutter.project_name }}"
 version = "{{ cookiecutter.version }}"
 description = "{{ cookiecutter.project_description }}"
 readme = "README.md"
-authors = ["{{ cookiecutter.organization }} <{{ cookiecutter.email }}>"]
+authors = ["{{ cookiecutter.author_name }} <{{ cookiecutter.email }}>"]
 license = "{{ cookiecutter.license }}"
-repository = "https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}"
-homepage = "https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}"
+#! Update me
+# repository =
+# homepage =
 
 # Keywords description https://python-poetry.org/docs/pyproject/#keywords
-keywords = []  #! Update me
+#! Update me
+keywords = []
 
 # Pypi classifiers: https://pypi.org/classifiers/
-classifiers = [  #! Update me
+#! Update me
+classifiers = [
   "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
   "Operating System :: OS Independent",
   "Topic :: Software Development :: Libraries :: Python Modules",
   "{{ license_classifiers[cookiecutter.license] }}",
-  "Programming Language :: Python :: 3",
-  {%- for minor_version in cookiecutter._all_python_minor_version if minor_version >= python_version_splitted[1] %}
-  "Programming Language :: Python :: 3.{{ minor_version }}",{% endfor %}
 ]
 
 {% if cookiecutter.create_example_template == 'cli' -%}[tool.poetry.scripts]

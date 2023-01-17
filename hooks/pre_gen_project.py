@@ -8,29 +8,6 @@ PROJECT_VERSION = "{{ cookiecutter.version }}"
 LINE_LENGTH_PARAMETER = "{{ cookiecutter.line_length }}"
 
 
-MODULE_REGEX = re.compile(r"^[a-z][a-z0-9\-\_]+[a-z0-9]$")
-SEMVER_REGEX = re.compile(
-    r"""
-        ^
-        (?P<major>0|[1-9]\d*)
-        \.
-        (?P<minor>0|[1-9]\d*)
-        \.
-        (?P<patch>0|[1-9]\d*)
-        (?:-(?P<prerelease>
-            (?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)
-            (?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*
-        ))?
-        (?:\+(?P<build>
-            [0-9a-zA-Z-]+
-            (?:\.[0-9a-zA-Z-]+)*
-        ))?
-        $
-    """,
-    re.VERBOSE,
-)
-
-
 def validate_project_name(project_name: str) -> None:
     """Ensure that `project_name` parameter is valid.
 
@@ -43,6 +20,7 @@ def validate_project_name(project_name: str) -> None:
     Raises:
         ValueError: If project_name is not a valid Python module name
     """
+    MODULE_REGEX = re.compile(r"^[a-z][a-z0-9\-\_]+[a-z0-9]$")
     if MODULE_REGEX.fullmatch(project_name) is None:
         message = f"ERROR: The project name `{project_name}` is not a valid Python module name."
         raise ValueError(message)
@@ -57,6 +35,26 @@ def validate_semver(version: str) -> None:
     Raises:
         ValueError: If version is not in semver notation
     """
+    SEMVER_REGEX = re.compile(
+        r"""
+            ^
+            (?P<major>0|[1-9]\d*)
+            \.
+            (?P<minor>0|[1-9]\d*)
+            \.
+            (?P<patch>0|[1-9]\d*)
+            (?:-(?P<prerelease>
+                (?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)
+                (?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*
+            ))?
+            (?:\+(?P<build>
+                [0-9a-zA-Z-]+
+                (?:\.[0-9a-zA-Z-]+)*
+            ))?
+            $
+        """,
+        re.VERBOSE,
+    )
     if SEMVER_REGEX.fullmatch(version) is None:
         message = f"ERROR: The `{version}` is not in semver notation (https://semver.org/)"
         raise ValueError(message)
@@ -71,8 +69,10 @@ def validate_line_length(line_length: int) -> None:
     Raises:
         ValueError: If line_length isn't between 50 and 300
     """
-    if not (50 <= line_length <= 300):
-        message = f"ERROR: line_length must be between 50 and 300. Got `{line_length}`."
+    MIN_LINE_LENGTH = 50
+    MAX_LINE_LENGTH = 300
+    if not (MIN_LINE_LENGTH <= line_length <= MAX_LINE_LENGTH):
+        message = f"ERROR: line_length must be between {MIN_LINE_LENGTH} and {MAX_LINE_LENGTH}. Got `{line_length}`."
         raise ValueError(message)
 
 

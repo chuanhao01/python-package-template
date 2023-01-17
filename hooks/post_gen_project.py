@@ -15,9 +15,6 @@ CREATE_EXAMPLE_TEMPLATE = "{{ cookiecutter.create_example_template }}"
 LICENSE = "{{ cookiecutter.license }}"
 ORGANIZATION = "{{ cookiecutter.organization }}"
 
-# Values to generate github repository
-GITHUB_USER = "{{ cookiecutter.github_name }}"
-
 licences_dict = {
     "MIT": "mit",
     "BSD-3": "bsd3",
@@ -45,9 +42,9 @@ def remove_unused_files(directory: Path, module_name: str, need_to_remove_cli: b
         module_name: project module name
         need_to_remove_cli: flag for removing CLI related files
     """
-    files_to_delete: List[Path] = []
+    files_to_delete: list[Path] = []
 
-    def _cli_specific_files() -> List[Path]:
+    def _cli_specific_files() -> list[Path]:
         return [directory / module_name / "__main__.py"]
 
     if need_to_remove_cli:
@@ -57,12 +54,11 @@ def remove_unused_files(directory: Path, module_name: str, need_to_remove_cli: b
         path.unlink()
 
 
-def print_futher_instuctions(project_name: str, github: str) -> None:
+def print_futher_instuctions(project_name: str) -> None:
     """Show user what to do next after project creation.
 
     Args:
         project_name: current project name
-        github: GitHub username
     """
     message = f"""
     Your project {project_name} is created.
@@ -84,13 +80,6 @@ def print_futher_instuctions(project_name: str, github: str) -> None:
 
         $ make codestyle
 
-    5) Upload initial code to GitHub:
-
-        $ git add .
-        $ git commit -m ":tada: Initial commit"
-        $ git branch -M main
-        $ git remote add origin https://github.com/{github}/{project_name}.git
-        $ git push -u origin main
     """
     print(textwrap.dedent(message))
 
@@ -102,7 +91,7 @@ def main() -> None:
         module_name=PROJECT_MODULE,
         need_to_remove_cli=CREATE_EXAMPLE_TEMPLATE != "cli",
     )
-    print_futher_instuctions(project_name=PROJECT_NAME, github=GITHUB_USER)
+    print_futher_instuctions(project_name=PROJECT_NAME)
 
 
 if __name__ == "__main__":

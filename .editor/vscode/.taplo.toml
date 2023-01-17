@@ -1,0 +1,2 @@
+# Specific config for Even Better TOML extension in VSCode
+exclude = ["**/*pyproject.toml"]
