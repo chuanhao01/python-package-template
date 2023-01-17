@@ -375,7 +375,7 @@ This project is licensed under the terms of the `{{ cookiecutter.license }}` lic
 ## 📃 Citation
 <!--
 Add back in
-  howpublished = {\url{https://github.com/{{ cookiecutter.github_name }}/{{ cookiecutter.project_name }}{% raw %}}}{% endraw %}
+  howpublished = {\url{https://github.com/cookiecutter.github_name/cookiecutter.project_name{% raw %}}}{% endraw %}
 -->
 
 ```bibtex
