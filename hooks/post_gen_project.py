@@ -42,9 +42,9 @@ def remove_unused_files(directory: Path, module_name: str, need_to_remove_cli: b
         module_name: project module name
         need_to_remove_cli: flag for removing CLI related files
     """
-    files_to_delete: List[Path] = []
+    files_to_delete: list[Path] = []
 
-    def _cli_specific_files() -> List[Path]:
+    def _cli_specific_files() -> list[Path]:
         return [directory / module_name / "__main__.py"]
 
     if need_to_remove_cli:
