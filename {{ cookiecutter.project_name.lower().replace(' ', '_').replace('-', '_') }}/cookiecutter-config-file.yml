@@ -1,12 +1,12 @@
-# This file contains values from Cookiecutter
+# Values used to generate this template
 
 default_context:
   project_name: "{{ cookiecutter.project_name }}"
   project_description: "{{ cookiecutter.project_description }}"
   organization: "{{ cookiecutter.organization }}"
   license: "{{ cookiecutter.license }}"
-  minimal_python_version: {{ cookiecutter.minimal_python_version }}
-  github_name: "{{ cookiecutter.github_name }}"
+  minimal_python_version: "{{ cookiecutter.minimal_python_version }}"
+  author_name: "{{ cookiecutter.author_name }}"
   email: "{{ cookiecutter.email }}"
   version: "{{ cookiecutter.version }}"
   line_length: "{{ cookiecutter.line_length }}"
