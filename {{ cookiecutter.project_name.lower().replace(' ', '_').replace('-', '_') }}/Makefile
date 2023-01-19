@@ -38,10 +38,14 @@ codestyle:
 formatting: codestyle
 
 #* Linting
+# Run process for test
+.PHONY: test-run
+test-run:
+	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=hooks tests/
+
+# --- Replace here for test-gen-badge ---
 .PHONY: test
-test:
-	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov={{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }} tests/
-	poetry run coverage-badge -o assets/images/coverage.svg -f
+test: test-run
 
 .PHONY: check-codestyle
 check-codestyle:
