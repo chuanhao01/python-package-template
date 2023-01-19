@@ -34,10 +34,18 @@ codestyle:
 formatting: codestyle
 
 #* Linting
-.PHONY: test
-test:
+# Run process for test
+.PHONY: test-run
+test-run:
 	PYTHONPATH=$(PYTHONPATH) poetry run pytest -c pyproject.toml --cov-report=html --cov=hooks tests/
+
+# Generate a coverage badge based on output
+.PHONY: test-gen-badge
+test-gen-badge:
 	poetry run coverage-badge -o assets/images/coverage.svg -f
+
+.PHONY: test
+test: test-run test-gen-badge
 
 .PHONY: check-codestyle
 check-codestyle:
