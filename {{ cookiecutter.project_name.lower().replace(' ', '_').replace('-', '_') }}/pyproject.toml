@@ -36,7 +36,7 @@ classifiers = [
 
 {% if cookiecutter.create_example_template == 'cli' -%}[tool.poetry.scripts]
 # Entry points for the package https://python-poetry.org/docs/pyproject/#scripts
-"{{ cookiecutter.project_name }}" = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}.__main__:app"{%- endif %}
+"{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}" = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}.__main__:app"{%- endif %}
 
 [tool.poetry.dependencies]
 python = "^{{ cookiecutter.minimal_python_version }}"
@@ -143,7 +143,7 @@ addopts = [
 source = ["tests"]
 
 [coverage.paths]
-source = "{{ cookiecutter.project_name }}"
+source = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}
 
 [coverage.run]
 branch = true
