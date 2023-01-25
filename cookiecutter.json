@@ -8,6 +8,7 @@
   "email": "",
   "version": "0.1.0",
   "line_length": 100,
-  "create_example_template": ["cli", "none"]
+  "create_example_template": ["cli", "none"],
+  "additional_content": ["yes", "no"]
 
 }
