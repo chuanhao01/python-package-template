@@ -36,3 +36,11 @@ You can add in the ability to generate a coverage badge based on your coverage r
 
 To add:
 Take the code [here](./Makefile#L1) and replace it [here](../Makefile#L46)
+
+## .editor
+
+A folder to folder editor specific configs for the project.
+
+To add:
+- Copy the `.editor` folder into the root of the project
+- Add in your editor configs, update the `.editor/README.md`
