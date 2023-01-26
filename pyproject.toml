@@ -55,7 +55,6 @@ pytest-cov = "^3.0.0"
 # https://github.com/psf/black
 target-version = ["py37"]
 line-length = 100
-color = true
 
 exclude = '''
 /(
