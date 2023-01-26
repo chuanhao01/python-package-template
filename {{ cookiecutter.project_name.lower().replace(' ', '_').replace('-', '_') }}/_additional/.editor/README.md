@@ -6,11 +6,6 @@ It is then up to the other developers whether they would want to use these confi
 
 Notes about the config should be found here or as comments in the respective files.
 
-## VSCode
-
-To add:
-Copy the contents of the `vscode` folder into the root of the project.
-
 ## .editorconfig
 
 To add:

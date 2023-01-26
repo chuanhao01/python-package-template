@@ -34,14 +34,16 @@ classifiers = [
   "{{ license_classifiers[cookiecutter.license] }}",
 ]
 
-{% if cookiecutter.create_example_template == 'cli' -%}[tool.poetry.scripts]
+{% if cookiecutter.create_example_template == 'cli' -%}
+[tool.poetry.scripts]
 # Entry points for the package https://python-poetry.org/docs/pyproject/#scripts
-"{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}" = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}.__main__:app"{%- endif %}
+"{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}" = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}.__main__:app"
+{%- endif %}
 
 [tool.poetry.dependencies]
 python = "^{{ cookiecutter.minimal_python_version }}"
 {% if cookiecutter.minimal_python_version == '3.7' -%}importlib_metadata = {version = "^4.5.0", python = "<3.8"}{%- endif -%}
-{%+ if cookiecutter.create_example_template == 'cli' %}
+{% if cookiecutter.create_example_template == 'cli' %}
 typer = {extras = ["all"], version = "^0.4.0"}
 rich = "^10.14.0"
 {% endif %}
@@ -67,7 +69,6 @@ pytest-cov = "^3.0.0"
 # https://github.com/psf/black
 target-version = ["py{{ cookiecutter.minimal_python_version.replace('.', '') }}"]
 line-length = {{ cookiecutter.line_length }}
-color = true
 
 exclude = '''
 /(
@@ -97,6 +98,31 @@ profile = "black"
 multi_line_output = 3
 indent = 4
 color_output = true
+
+[tool.pylint.messages_control]
+disable = [
+    # Disable too many and too few checks.
+    "too-many-ancestors",
+    "too-many-arguments",
+    "too-many-boolean-expressions",
+    "too-many-branches",
+    "too-many-function-args",
+    "too-many-instance-attributes",
+    "too-many-lines",
+    "too-many-locals",
+    "too-many-nested-blocks",
+    "too-many-public-methods",
+    "too-many-return-statements",
+    "too-many-statements",
+    "too-few-public-methods",
+    # Disable docstrings checks as we don't require excessive documentation.
+    "missing-docstring",
+    "broad-except",
+    "line-too-long",
+]
+
+[tool.pylint.format]
+max-line-length = {{ cookiecutter.line_length }}
 
 [tool.mypy]
 # https://mypy.readthedocs.io/en/latest/config_file.html#using-a-pyproject-toml-file
@@ -143,7 +169,7 @@ addopts = [
 source = ["tests"]
 
 [coverage.paths]
-source = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}
+source = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
 
 [coverage.run]
 branch = true

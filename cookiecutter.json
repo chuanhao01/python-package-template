@@ -4,13 +4,11 @@
   "organization": "",
   "license": ["MIT", "BSD-3", "GNU GPL v3.0", "Apache Software License 2.0"],
   "minimal_python_version": ["3.7", "3.8", "3.9", "3.10"],
-  "author_name": "",
-  "email": "",
+  "author_name": "name",
+  "email": "email@email.com",
   "version": "0.1.0",
   "line_length": 100,
   "create_example_template": ["cli", "none"],
+  "additional_content": ["yes", "no"]
 
-  "_copy_without_render": [
-    "poetry.lock"
-  ]
 }

@@ -1,20 +1,23 @@
 """This module is called after project is created."""
-from typing import List
 
 import textwrap
 from pathlib import Path
-from shutil import move, rmtree
+from shutil import copyfile, rmtree
 
-# Project root directory
-PROJECT_DIRECTORY = Path.cwd().absolute()
+PROJECT_ROOT = Path.cwd().absolute()
 PROJECT_NAME = "{{ cookiecutter.project_name }}"
 PROJECT_MODULE = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
 CREATE_EXAMPLE_TEMPLATE = "{{ cookiecutter.create_example_template }}"
+ADDITIONAL_CONTENT = "{{ cookiecutter.additional_content }}"
+
+ADDITIONAL_CONTENT_DIR = PROJECT_ROOT / "_additional"
+LICENSES_DIR = PROJECT_ROOT / "_licences"
 
 # Values to generate correct license
 LICENSE = "{{ cookiecutter.license }}"
 ORGANIZATION = "{{ cookiecutter.organization }}"
 
+# License selected to file name mapping
 licences_dict = {
     "MIT": "mit",
     "BSD-3": "bsd3",
@@ -23,43 +26,46 @@ licences_dict = {
 }
 
 
-def generate_license(directory: Path, licence: str) -> None:
-    """Generate license file for the project.
-
-    Args:
-        directory: path to the project directory
-        licence: chosen licence
-    """
-    move(str(directory / "_licences" / f"{licence}.txt"), str(directory / "LICENSE"))
-    rmtree(str(directory / "_licences"))
+def generate_license(project_root: Path, licenses_dir: Path, licence: str) -> None:
+    """Generates and cleans up license  file for the project"""
+    copyfile(
+        (licenses_dir / f"{licence}.txt").as_posix(),
+        (project_root / "LICENSE").as_posix(),
+    )
+    rmtree(licenses_dir.as_posix())
 
 
-def remove_unused_files(directory: Path, module_name: str, need_to_remove_cli: bool) -> None:
+def remove_cli(project_root: Path, module_name: str) -> None:
     """Remove unused files.
 
     Args:
-        directory: path to the project directory
+        project_root: path to the project project_root
         module_name: project module name
-        need_to_remove_cli: flag for removing CLI related files
     """
-    files_to_delete: list[Path] = []
-
-    def _cli_specific_files() -> list[Path]:
-        return [directory / module_name / "__main__.py"]
-
-    if need_to_remove_cli:
-        files_to_delete.extend(_cli_specific_files())
-
-    for path in files_to_delete:
-        path.unlink()
+    file_to_delete: Path = project_root / module_name / "__main__.py"
+    file_to_delete.unlink()
 
 
-def print_futher_instuctions(project_name: str) -> None:
-    """Show user what to do next after project creation.
+def remove_additional_content(additional_content_dir: Path) -> None:
+    rmtree(additional_content_dir.as_posix())
 
-    Args:
-        project_name: current project name
+
+def print_usage_additional_instructions():
+    """Shows user what to do with the additional data generated"""
+    message = """
+    === NOTE (Additional Data) ===
+
+    There is also additional data generated along with your project.
+    You can find how and what you can do with the files in ./.additional directory.
+
+    DO REMEMBER to delete the `.additional` directory after you are done adding any data you want.
+    IT IS RECOMMENDED TO NOT commit the folder into git
     """
+    print(textwrap.dedent(message))
+
+
+def print_futher_instructions(project_name: str) -> None:
+    """Show user what to do next after project creation."""
     message = f"""
     Your project {project_name} is created.
 
@@ -85,13 +91,22 @@ def print_futher_instuctions(project_name: str) -> None:
 
 
 def main() -> None:
-    generate_license(directory=PROJECT_DIRECTORY, licence=licences_dict[LICENSE])
-    remove_unused_files(
-        directory=PROJECT_DIRECTORY,
-        module_name=PROJECT_MODULE,
-        need_to_remove_cli=CREATE_EXAMPLE_TEMPLATE != "cli",
+    # Post project generation cleanup
+    generate_license(
+        project_root=PROJECT_ROOT, licenses_dir=LICENSES_DIR, licence=licences_dict[LICENSE]
     )
-    print_futher_instuctions(project_name=PROJECT_NAME)
+    if CREATE_EXAMPLE_TEMPLATE != "cli":
+        remove_cli(
+            project_root=PROJECT_ROOT,
+            module_name=PROJECT_MODULE,
+        )
+    if ADDITIONAL_CONTENT == "no":
+        remove_additional_content(additional_content_dir=ADDITIONAL_CONTENT_DIR)
+
+    # Showing instructions
+    print_futher_instructions(project_name=PROJECT_NAME)
+    if ADDITIONAL_CONTENT == "yes":
+        print_usage_additional_instructions()
 
 
 if __name__ == "__main__":
