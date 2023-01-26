@@ -67,7 +67,6 @@ pytest-cov = "^3.0.0"
 # https://github.com/psf/black
 target-version = ["py{{ cookiecutter.minimal_python_version.replace('.', '') }}"]
 line-length = {{ cookiecutter.line_length }}
-color = true
 
 exclude = '''
 /(
