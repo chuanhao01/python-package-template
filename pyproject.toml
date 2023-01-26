@@ -85,6 +85,12 @@ multi_line_output = 3
 indent = 4
 color_output = true
 
+[tool.pylint.master]
+init-hook = ['import sys, os; dir=f"{os.getcwd()}/"; sys.path.append(dir)']
+persistent = 'yes'
+suggestion-mode = 'yes'
+unsafe-load-any-extension = 'no'
+
 [tool.pylint.messages_control]
 disable = [
     # Disable too many and too few checks.
