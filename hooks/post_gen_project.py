@@ -1,15 +1,14 @@
 """This module is called after project is created."""
-from typing import List
 
 import textwrap
 from pathlib import Path
-from shutil import move, rmtree
+from shutil import copyfile, rmtree
 
-# Project root directory
-PROJECT_DIRECTORY = Path.cwd().absolute()
+PROJECT_ROOT = Path.cwd().absolute()
 PROJECT_NAME = "{{ cookiecutter.project_name }}"
 PROJECT_MODULE = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
 CREATE_EXAMPLE_TEMPLATE = "{{ cookiecutter.create_example_template }}"
+ADDITIONAL_CONTENT = "{{ cookiecutter.additional_content }}"
 
 # Values to generate correct license
 LICENSE = "{{ cookiecutter.license }}"
@@ -23,35 +22,33 @@ licences_dict = {
 }
 
 
-def generate_license(directory: Path, licence: str) -> None:
+def generate_license(project_root: Path, licence: str) -> None:
     """Generate license file for the project.
 
     Args:
-        directory: path to the project directory
+        project_root: path to the project project_root
         licence: chosen licence
     """
-    move(str(directory / "_licences" / f"{licence}.txt"), str(directory / "LICENSE"))
-    rmtree(str(directory / "_licences"))
+    copyfile(
+        (project_root / "_licences" / f"{licence}.txt").as_posix(),
+        (project_root / "LICENSE").as_posix(),
+    )
+    rmtree((project_root / "_licences").as_posix())
 
 
-def remove_unused_files(directory: Path, module_name: str, need_to_remove_cli: bool) -> None:
+def remove_cli(project_root: Path, module_name: str) -> None:
     """Remove unused files.
 
     Args:
-        directory: path to the project directory
+        project_root: path to the project project_root
         module_name: project module name
-        need_to_remove_cli: flag for removing CLI related files
     """
-    files_to_delete: list[Path] = []
+    file_to_delete: Path = project_root / module_name / "__main__.py"
+    file_to_delete.unlink()
 
-    def _cli_specific_files() -> list[Path]:
-        return [directory / module_name / "__main__.py"]
 
-    if need_to_remove_cli:
-        files_to_delete.extend(_cli_specific_files())
-
-    for path in files_to_delete:
-        path.unlink()
+def remove_additional_content(project_root: Path) -> None:
+    rmtree((project_root / ".additional").as_posix())
 
 
 def print_futher_instuctions(project_name: str) -> None:
@@ -85,12 +82,14 @@ def print_futher_instuctions(project_name: str) -> None:
 
 
 def main() -> None:
-    generate_license(directory=PROJECT_DIRECTORY, licence=licences_dict[LICENSE])
-    remove_unused_files(
-        directory=PROJECT_DIRECTORY,
-        module_name=PROJECT_MODULE,
-        need_to_remove_cli=CREATE_EXAMPLE_TEMPLATE != "cli",
-    )
+    generate_license(project_root=PROJECT_ROOT, licence=licences_dict[LICENSE])
+    if CREATE_EXAMPLE_TEMPLATE != "cli":
+        remove_cli(
+            project_root=PROJECT_ROOT,
+            module_name=PROJECT_MODULE,
+        )
+    if ADDITIONAL_CONTENT == "no":
+        remove_additional_content(project_root=PROJECT_ROOT)
     print_futher_instuctions(project_name=PROJECT_NAME)
 
 
