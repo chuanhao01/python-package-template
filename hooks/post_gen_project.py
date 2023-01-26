@@ -10,10 +10,14 @@ PROJECT_MODULE = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace
 CREATE_EXAMPLE_TEMPLATE = "{{ cookiecutter.create_example_template }}"
 ADDITIONAL_CONTENT = "{{ cookiecutter.additional_content }}"
 
+ADDITIONAL_CONTENT_DIR = PROJECT_ROOT / "_additional"
+LICENSES_DIR = PROJECT_ROOT / "_licenses"
+
 # Values to generate correct license
 LICENSE = "{{ cookiecutter.license }}"
 ORGANIZATION = "{{ cookiecutter.organization }}"
 
+# License selected to file name mapping
 licences_dict = {
     "MIT": "mit",
     "BSD-3": "bsd3",
@@ -22,18 +26,13 @@ licences_dict = {
 }
 
 
-def generate_license(project_root: Path, licence: str) -> None:
-    """Generate license file for the project.
-
-    Args:
-        project_root: path to the project project_root
-        licence: chosen licence
-    """
+def generate_license(project_root: Path, licenses_dir: Path, licence: str) -> None:
+    """Generates and cleans up license  file for the project"""
     copyfile(
-        (project_root / "_licences" / f"{licence}.txt").as_posix(),
+        (licenses_dir / f"{licence}.txt").as_posix(),
         (project_root / "LICENSE").as_posix(),
     )
-    rmtree((project_root / "_licences").as_posix())
+    rmtree(licenses_dir.as_posix())
 
 
 def remove_cli(project_root: Path, module_name: str) -> None:
@@ -47,16 +46,26 @@ def remove_cli(project_root: Path, module_name: str) -> None:
     file_to_delete.unlink()
 
 
-def remove_additional_content(project_root: Path) -> None:
-    rmtree((project_root / ".additional").as_posix())
+def remove_additional_content(additional_content_dir: Path) -> None:
+    rmtree(additional_content_dir.as_posix())
 
 
-def print_futher_instuctions(project_name: str) -> None:
-    """Show user what to do next after project creation.
+def print_usage_additional_instructions():
+    """Shows user what to do with the additional data generated"""
+    message = """
+    === NOTE (Additional Data) ===
 
-    Args:
-        project_name: current project name
+    There is also additional data generated along with your project.
+    You can find how and what you can do with the files in ./.additional directory.
+
+    DO REMEMBER to delete the `.additional` directory after you are done adding any data you want.
+    IT RECOMMENDED TO NOT commit the folder into git
     """
+    print(message)
+
+
+def print_futher_instructions(project_name: str) -> None:
+    """Show user what to do next after project creation."""
     message = f"""
     Your project {project_name} is created.
 
@@ -82,15 +91,22 @@ def print_futher_instuctions(project_name: str) -> None:
 
 
 def main() -> None:
-    generate_license(project_root=PROJECT_ROOT, licence=licences_dict[LICENSE])
+    # Post project generation cleanup
+    generate_license(
+        project_root=PROJECT_ROOT, licenses_dir=LICENSES_DIR, licence=licences_dict[LICENSE]
+    )
     if CREATE_EXAMPLE_TEMPLATE != "cli":
         remove_cli(
             project_root=PROJECT_ROOT,
             module_name=PROJECT_MODULE,
         )
     if ADDITIONAL_CONTENT == "no":
-        remove_additional_content(project_root=PROJECT_ROOT)
-    print_futher_instuctions(project_name=PROJECT_NAME)
+        remove_additional_content(additional_content_dir=ADDITIONAL_CONTENT_DIR)
+
+    # Showing instructions
+    print_futher_instructions(project_name=PROJECT_NAME)
+    if ADDITIONAL_CONTENT == "yes":
+        print_usage_additional_instructions()
 
 
 if __name__ == "__main__":
