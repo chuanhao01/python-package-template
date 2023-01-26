@@ -169,7 +169,7 @@ addopts = [
 source = ["tests"]
 
 [coverage.paths]
-source = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}
+source = "{{ cookiecutter.project_name.lower().replace(' ', '_').replace('-', '_') }}"
 
 [coverage.run]
 branch = true
