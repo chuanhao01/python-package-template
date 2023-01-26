@@ -11,7 +11,7 @@ CREATE_EXAMPLE_TEMPLATE = "{{ cookiecutter.create_example_template }}"
 ADDITIONAL_CONTENT = "{{ cookiecutter.additional_content }}"
 
 ADDITIONAL_CONTENT_DIR = PROJECT_ROOT / "_additional"
-LICENSES_DIR = PROJECT_ROOT / "_licenses"
+LICENSES_DIR = PROJECT_ROOT / "_licences"
 
 # Values to generate correct license
 LICENSE = "{{ cookiecutter.license }}"
@@ -59,9 +59,9 @@ def print_usage_additional_instructions():
     You can find how and what you can do with the files in ./.additional directory.
 
     DO REMEMBER to delete the `.additional` directory after you are done adding any data you want.
-    IT RECOMMENDED TO NOT commit the folder into git
+    IT IS RECOMMENDED TO NOT commit the folder into git
     """
-    print(message)
+    print(textwrap.dedent(message))
 
 
 def print_futher_instructions(project_name: str) -> None:
