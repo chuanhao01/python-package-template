@@ -74,7 +74,7 @@ exclude = '''
 
 [tool.isort]
 # https://github.com/timothycrosley/isort/
-py_version = 37
+py_version = 310
 line_length = 100
 
 known_typing = ["typing", "types", "typing_extensions", "mypy", "mypy_extensions"]
@@ -85,6 +85,30 @@ multi_line_output = 3
 indent = 4
 color_output = true
 
+[tool.pylint.messages_control]
+disable = [
+    # Disable too many and too few checks.
+    "too-many-ancestors",
+    "too-many-arguments",
+    "too-many-boolean-expressions",
+    "too-many-branches",
+    "too-many-function-args",
+    "too-many-instance-attributes",
+    "too-many-lines",
+    "too-many-locals",
+    "too-many-nested-blocks",
+    "too-many-public-methods",
+    "too-many-return-statements",
+    "too-many-statements",
+    "too-few-public-methods",
+    # Disable docstrings checks as we don't require excessive documentation.
+    "missing-docstring",
+    "broad-except",
+    "line-too-long",
+]
+
+[tool.pylint.format]
+max-line-length = 100
 
 [tool.mypy]
 # https://mypy.readthedocs.io/en/latest/config_file.html#using-a-pyproject-toml-file
