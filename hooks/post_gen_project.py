@@ -86,6 +86,9 @@ def print_futher_instructions(project_name: str) -> None:
 
         $ make codestyle
 
+    === NOTE (Recommended Changes) ===
+    - Check through docs, README.md, SECURITY.md, CODE_OF_CONDUCT.md, CONTRIBUTING.md
+
     """
     print(textwrap.dedent(message))
 
