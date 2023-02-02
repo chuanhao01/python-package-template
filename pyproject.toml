@@ -10,8 +10,8 @@ description = "Cookiecutter template for Python cli/packages"
 readme = "README.md"
 authors = ["Roman Tezikov <tez.romach@gmail.com>"]
 license = "MIT"
-repository = "https://github.com/TezRomacH/python-package-template"
-homepage = "https://github.com/TezRomacH/python-package-template"
+repository = "https://github.com/chuanhao01/python-package-template"
+homepage = "https://github.com/chuanhao01/python-package-template"
 keywords = [
     "python",
     "cookiecutter",
