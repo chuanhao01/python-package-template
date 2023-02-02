@@ -18,7 +18,7 @@ Copy the `.github` folder to the root of your project
 To Modify:
 Use and edit as you wish
 
-### workflows
+### Workflows
 
 To Modify:
 
@@ -29,6 +29,21 @@ To Modify:
 - `release-drafter.yml`
   - Ensure the correct branch is set
 
+### Additional Information
+
+#### Set up bots
+
+- Set up [Dependabot](https://docs.github.com/en/github/administering-a-repository/enabling-and-disabling-version-updates#enabling-github-dependabot-version-updates) to ensure you have the latest dependencies.
+- Set up [Stale bot](https://github.com/apps/stale) for automatic issue closing.
+
+#### Building and releasing your package
+
+Building a new version of the application contains steps:
+
+- Bump the version of your package `poetry version <version>`. You can pass the new version explicitly, or a rule such as `major`, `minor`, or `patch`. For more details, refer to the [Semantic Versions](https://semver.org/) standard.
+- Make a commit to `GitHub`.
+- Create a `GitHub release`.
+- And... publish 🙂 `poetry publish --build`
 
 ## Makefile
 
