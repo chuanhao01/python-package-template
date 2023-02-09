@@ -126,7 +126,7 @@ max-line-length = {{ cookiecutter.line_length }}
 
 [tool.mypy]
 # https://mypy.readthedocs.io/en/latest/config_file.html#using-a-pyproject-toml-file
-python_version = {{ cookiecutter.minimal_python_version }}
+python_version = "{{ cookiecutter.minimal_python_version }}"
 pretty = true
 show_traceback = true
 color_output = true
