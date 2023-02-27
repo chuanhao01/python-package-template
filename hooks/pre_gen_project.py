@@ -7,7 +7,7 @@ PROJECT_NAME = "{{ cookiecutter.project_name }}"
 PROJECT_VERSION = "{{ cookiecutter.version }}"
 LINE_LENGTH_PARAMETER = "{{ cookiecutter.line_length }}"
 AUTHOR_NAME = "{{ cookiecutter.author_name }}"
-EMAIL = "{{ cookiecutter.author_email }}"
+AUTHOR_EMAIL = "{{ cookiecutter.author_email }}"
 
 
 def validate_project_name(project_name: str) -> None:
@@ -99,7 +99,7 @@ def main() -> None:
         validate_semver(version=PROJECT_VERSION)
         validate_line_length(line_length=int(LINE_LENGTH_PARAMETER))
         validate_author_name(author_name=AUTHOR_NAME)
-        validate_email(email=EMAIL)
+        validate_email(email=AUTHOR_EMAIL)
     except ValueError as ex:
         print(ex)
         sys.exit(1)
