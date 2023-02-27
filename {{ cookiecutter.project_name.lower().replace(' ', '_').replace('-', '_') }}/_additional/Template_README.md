@@ -1,6 +1,7 @@
-# More Information about the template
+# Template README
 
-You can read through the information provided below and choose what else to add into the project's main [`README.md`](../README.md)
+This contains additional information about the template project's README.
+It is up to you if you want to add the information below to the [project's `README.md](../README.md)
 
 ## Initialize your code
 
