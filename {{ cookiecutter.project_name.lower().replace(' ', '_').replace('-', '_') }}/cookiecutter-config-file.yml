@@ -7,7 +7,7 @@ default_context:
   license: "{{ cookiecutter.license }}"
   minimal_python_version: "{{ cookiecutter.minimal_python_version }}"
   author_name: "{{ cookiecutter.author_name }}"
-  email: "{{ cookiecutter.email }}"
+  author_email: "{{ cookiecutter.author_email }}"
   version: "{{ cookiecutter.version }}"
   line_length: "{{ cookiecutter.line_length }}"
   create_example_template: "{{ cookiecutter.create_example_template }}"
