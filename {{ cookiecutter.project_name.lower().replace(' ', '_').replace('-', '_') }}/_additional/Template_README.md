@@ -1,6 +1,8 @@
 # More Information about the template
 
-### Initialize your code
+You can read through the information provided below and choose what else to add into the project's main [`README.md`](../README.md)
+
+## Initialize your code
 
 1. Initialize `git` inside your repo:
 (Note to setup your git configs as well)
@@ -325,3 +327,15 @@ We use [`Release Drafter`](https://github.com/marketplace/actions/release-drafte
 You can update it in [`release-drafter.yml`](./.github/release-drafter.yml).
 
 GitHub creates the `bug`, `enhancement`, and `documentation` labels for you. Dependabot creates the `dependencies` label. Create the remaining labels on the Issues tab of your GitHub repository, when you need them.
+
+## 📃 Citation
+
+```bibtex
+{% raw %}@misc{{% endraw %}{{ cookiecutter.project_name }},
+  author = {% raw %}{{% endraw %}{{ cookiecutter.author_name }}{% raw %}}{% endraw %},
+  title = {% raw %}{{% endraw %}{{ cookiecutter.project_description }}{% raw %}}{% endraw %},
+  year = {% raw %}{{% endraw %}{% now 'utc', '%Y' %}{% raw %}}{% endraw %},
+  publisher = {GitHub},
+  journal = {GitHub repository},
+}
+```
