@@ -7,7 +7,7 @@ PROJECT_NAME = "{{ cookiecutter.project_name }}"
 PROJECT_VERSION = "{{ cookiecutter.version }}"
 LINE_LENGTH_PARAMETER = "{{ cookiecutter.line_length }}"
 AUTHOR_NAME = "{{ cookiecutter.author_name }}"
-EMAIL = "{{ cookiecutter.email }}"
+EMAIL = "{{ cookiecutter.author_email }}"
 
 
 def validate_project_name(project_name: str) -> None:
