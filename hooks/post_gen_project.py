@@ -53,14 +53,13 @@ def remove_additional_content(additional_content_dir: Path) -> None:
 def print_usage_additional_instructions():
     """Shows user what to do with the additional data generated"""
     message = """
-    === NOTE (Additional Data) ===
+    === Additional Data ===
 
     There is also additional data generated along with your project.
     You can find how and what you can do with the files in ./.additional directory.
 
     DO REMEMBER to delete the `.additional` directory after you are done adding any data you want.
-    IT IS RECOMMENDED TO NOT commit the folder into git
-    """
+    IT IS RECOMMENDED TO NOT commit the folder into git"""
     print(textwrap.dedent(message))
 
 
@@ -86,7 +85,9 @@ def print_futher_instructions(project_name: str) -> None:
 
         $ make codestyle
 
-    """
+    === Recommended Changes ===
+
+    - Check through docs, README.md, SECURITY.md, CODE_OF_CONDUCT.md, CONTRIBUTING.md"""
     print(textwrap.dedent(message))
 
 

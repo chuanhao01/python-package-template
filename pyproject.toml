@@ -10,8 +10,8 @@ description = "Cookiecutter template for Python cli/packages"
 readme = "README.md"
 authors = ["Roman Tezikov <tez.romach@gmail.com>"]
 license = "MIT"
-repository = "https://github.com/TezRomacH/python-package-template"
-homepage = "https://github.com/TezRomacH/python-package-template"
+repository = "https://github.com/chuanhao01/python-package-template"
+homepage = "https://github.com/chuanhao01/python-package-template"
 keywords = [
     "python",
     "cookiecutter",
@@ -84,6 +84,12 @@ include_trailing_comma = true
 multi_line_output = 3
 indent = 4
 color_output = true
+
+[tool.pylint.master]
+init-hook = ['import sys, os; dir=f"{os.getcwd()}/"; sys.path.append(dir)']
+persistent = 'yes'
+suggestion-mode = 'yes'
+unsafe-load-any-extension = 'no'
 
 [tool.pylint.messages_control]
 disable = [

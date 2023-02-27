@@ -1,5 +1,7 @@
 # How to contribute
 
+TO CHECK AND CHANGE IF NECESSARY
+
 ## Dependencies
 
 We use `poetry` to manage the [dependencies](https://github.com/python-poetry/poetry).
