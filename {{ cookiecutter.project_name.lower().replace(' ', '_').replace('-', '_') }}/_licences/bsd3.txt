@@ -1,4 +1,4 @@
-Copyright (c) {% now 'utc', '%Y' %}, {{ cookiecutter.organization }}
+Copyright (c) {% now 'utc', '%Y' %}, {{ cookiecutter.author_name }}
 
 All rights reserved.
 
