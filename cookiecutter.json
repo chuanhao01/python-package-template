@@ -1,7 +1,6 @@
 {
   "project_name": "python-project",
   "project_description": "",
-  "organization": "",
   "license": ["MIT", "BSD-3", "GNU GPL v3.0", "Apache Software License 2.0"],
   "minimal_python_version": ["3.7", "3.8", "3.9", "3.10"],
   "author_name": "name",

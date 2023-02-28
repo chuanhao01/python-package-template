@@ -15,7 +15,6 @@ LICENSES_DIR = PROJECT_ROOT / "_licences"
 
 # Values to generate correct license
 LICENSE = "{{ cookiecutter.license }}"
-ORGANIZATION = "{{ cookiecutter.organization }}"
 
 # License selected to file name mapping
 licences_dict = {
