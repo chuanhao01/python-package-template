@@ -30,8 +30,9 @@ TO BE ADDED AFTER PROJECT GENERATION
 
 [License](./LICENSE)
 
-This project is licensed under the terms of the `{{ cookiecutter.license }}` license. See [LICENSE](./LICENSE) for more details.
+This project is licensed under the terms of the `{{ cookiecutter.license }}` license.
+See [LICENSE](./LICENSE) for more details.
 
-## Credits [![🚀 Your next Python package needs a bleeding-edge project structure.](https://img.shields.io/badge/python--package--template-%F0%9F%9A%80-brightgreen)](https://github.com/TezRomacH/python-package-template)
+## Credits
 
 This project was generated with [`python-package-template`](https://github.com/chuanhao01/python-package-template), forked from the [original](https://github.com/TezRomacH/python-package-template)
