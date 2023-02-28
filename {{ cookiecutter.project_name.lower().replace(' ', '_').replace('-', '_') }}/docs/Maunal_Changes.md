@@ -11,3 +11,13 @@ To make this change, you would need to edit the files:
 
 - [`pyproject.toml`](../pyproject.toml)
 - [`SECURITY`](../SECURITY.md)
+
+## Adding an organization to the project
+
+You would have to add it official in the copyright for the [license](../LICENSE).
+
+You might also have to add them here:
+
+- [`README.md`](../README.md)
+- [`pyproject.toml`](../pyproject.toml)
+- [`SECURITY.md`](../SECURITY.md)
